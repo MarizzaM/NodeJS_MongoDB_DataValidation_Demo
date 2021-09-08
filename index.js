@@ -7,28 +7,12 @@ mongoose.connect('mongodb://localhost/courses')
 
 // Defining a schema 
 const courseSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 255,
-        //match: /pattern/
-    },
-    category: {
-        type: String,
-        required: true,
-        enum: ['web', 'mobile', 'network']
-    },
-    author: [String],
+    name: String,
+    author: String,
     tags: [String],
     date: { type: Date, default: Date.now },
     isPublished: Boolean,
-    price: {
-        type: Number,
-        required: function() { return this.isPublished; },
-        min: 10,
-        max: 200
-    }
+    price: Number
 });
 
 const Course = mongoose.model('Course', courseSchema);
