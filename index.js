@@ -44,15 +44,21 @@ const Course = mongoose.model('Course', courseSchema);
 async function createCourse(){
     const course = new Course({
         name: 'Node Course',
-        category: 'web',
+        category: '-',
         author: 'MarizzaMil',
-        tags: [],
+        tags: null,
         isPublished: true,
         price: 20
     });
     
-    const result = await course.save();
-    console.log(result);
+    try{
+        const result = await course.save();
+        console.log(result);
+    }
+    catch (ex){
+        for (field in ex.errors)
+            console.log(ex.errors[field].message)
+    }
 }
 
 async function getCourses(){
